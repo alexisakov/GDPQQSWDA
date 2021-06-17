@@ -1,0 +1,456 @@
+  Reading input spec file from C:\Users\AIsakov\AppData\Local\Temp\mmax13.spc
+  Reading data from C:\Users\AIsakov\AppData\Local\Temp\x11reg.dat
+  Reading data from C:\Users\AIsakov\AppData\Local\Temp\x11reg.var
+
+1
+
+               U. S. Department of Commerce, U. S. Census Bureau
+
+             X-13ARIMA-SEATS quarterly seasonal adjustment Method,
+                         Release Version 1.0 Build 149
+
+
+           This software application provides an enhanced version of
+             Statistics Canada's X-11-ARIMA extension (Dagum, 1980)
+                 of the X-11 variant of the Census Method II of
+                      Shiskin, Young and Musgrave (1967).
+
+            It also provides an ARIMA model-based method following
+       Hillmer and Tiao (1982) and Burman (1980) that is very similar
+       to the update of the method of SEATS (Gómez and Maravall, 1996)
+                produced at the Bank of Spain by G. Caporello and
+               A. Maravall for TSW (Caporello and Maravall, 2004).
+          The present application includes additional enhancements.
+
+         X-13ARIMA-SEATS includes an automatic ARIMA model selection procedure
+          based largely on the procedure of Gómez and Maravall (1998)
+            as implemented in TRAMO (1996) and subsequent revisions.
+
+              Primary Programmers: Brian Monsell, Mark Otto and,
+                 for the ARIMA model-based signal extraction,
+                      Gianluca Caporello and Victor Gómez
+
+
+     Series Title- Title
+     Series Name- mmax13
+     Jun 17, 2021  16.17.56 
+
+        -Period covered-  1st quarter,2011 to  1st quarter,2021
+        -Type of run - multiplicative seasonal adjustment
+
+        -Sigma limits for graduating extreme values are 1.5 and 2.5 .
+        -3x3 moving average used in section 1 of each iteration, 
+         3x5 moving average in section 2 of iterations B and C,
+         moving average for final seasonal factors chosen by Global MSR.
+        -Spectral estimates of original series, table D11 and table E3 will be searched for 
+         signficant seasonal and trading day peaks
+
+ FILE SAVE REQUESTS (* indicates file exists and will be overwritten)
+  C:\Users\AIsakov\AppData\Local\Temp\mmax13.d11  final seasonally adjusted data
+  C:\Users\AIsakov\AppData\Local\Temp\mmax13.out* program output file
+  C:\Users\AIsakov\AppData\Local\Temp\mmax13.err* program error file
+        Title            PAGE   1, SERIES mmax13
+
+     Contents of spc file C:\Users\AIsakov\AppData\Local\Temp\mmax13.spc
+
+ Line #
+ ------
+      1: series{
+      2: 			title = "Title"
+      3: 			period = 4
+      4: 			file = "C:\Users\AIsakov\AppData\Local\Temp\x11reg.dat"
+      5: 			format = "DATEVALUE"
+      6: 			
+      7: 		}
+      8: transform{function=log}
+      9: regression {
+     10: 					variables = (LS2015.1, LS2020.2, LS2020.3)
+     11: 				user = ("somevariable1", "somevariable2")
+     12: 				usertype = (td, user)
+     13: 				file = "C:\Users\AIsakov\AppData\Local\Temp\x11reg.var"
+     14:  
+     15: 				format = "DATEVALUE"
+     16:  
+     17:  
+     18: 				
+     19: 				}
+     20:  
+     21: 		pickmdl{
+     22: 	    		mode = both
+     23: 	     		file = "C:\Users\AIsakov\AppData\Local\Temp\pickmdl.mds"
+     24:      		}
+     25:  
+     26:  		outlier{}
+     27:  
+     28: 		forecast{
+     29: 			maxlead = 6
+     30: 			maxback = 12}
+     31: 			
+     32: 		x11{
+     33: 			# mode=
+     34: 			final = (user)
+     35: 			appendfcst = YES
+     36: 			print=none
+     37: 			save=(d11)
+     38: 		}
+        Title            PAGE   2, SERIES mmax13
+
+ A 1  Time series data (for the span analyzed)
+  From      2011.1 to 2021.1
+  Observations         41
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th           TOTAL  
+ ------------------------------------------------------------------------------
+  2011          18440.       19715.       20978.       22617.           81751.
+ 
+  2012          19492.       20672.       21712.       23164.           85040.
+ 
+  2013          19713.       21028.       22039.       23753.           86533.
+ 
+  2014          19703.       21145.       22349.       23974.           87170.
+ 
+  2015          19402.       20491.       21968.       23590.           85451.
+ 
+  2016          19362.       20557.       21981.       23717.           85616.
+ 
+  2017          19616.       21039.       22561.       23964.           87179.
+ 
+  2018          20119.       21613.       23155.       24740.           89627.
+ 
+  2019          20372.       21871.       23760.       25446.           91449.
+ 
+  2020          20652.       20164.       22939.       24996.           88750.
+ 
+  2021          20515.                                                  20515.
+ 
+  AVGE          19762.       20829.       22344.       23996.
+
+  Table Total-        889079.90   Mean-       21684.88   Std. Dev.-        1751.40
+                                  Min -       18440.10        Max -       25445.60
+  Reading model file for automatic model selection from C:\Users\AIsakov\AppData\Local\Temp\pickmdl.mds
+     Autoregressive Integrated Moving Average (ARIMA) extrapolation program
+       ARIMA extrapolation model (forecast)
+
+
+     Model selected: First model that meets acceptance criteria.
+ Transformation
+  Log(y)
+
+ OUTLIER DETECTION
+  From      2011.1 to 2021.1
+  Observations         41
+  Types           AO and LS
+  Method            add one
+  Critical |t| for AO outliers           3.58
+  Critical |t| for LS outliers           3.58
+
+ regARIMA Model Span
+  From  2011.1 to 2021.1
+
+
+ Model   1: (0, 1, 1)(0, 1, 1)
+
+ Regression Model
+  LS2015.1 + LS2020.2 + LS2020.3 + User-defined
+
+ Average absolute percentage error in within-sample forecasts:
+  Last year:   1.07      Last-1 year:   0.69     Last-2 year:   0.63
+  Last three years:    0.80
+
+  Chi Square Probability:    45.92 %  (Q =       9.7884,   10 DF)
+
+  Nonseasonal MA parameter estimates:     0.139
+  Seasonal MA parameter estimates:       -0.165
+
+
+               The model chosen is (0, 1, 1)(0, 1, 1)
+
+     Autoregressive Integrated Moving Average (ARIMA) extrapolation program
+       ARIMA extrapolation model (backcast)
+
+
+
+ Model   1: (0, 1, 1)(0, 1, 1)
+
+ Regression Model
+  LS2015.1 + LS2020.2 + LS2020.3 + User-defined
+
+ Average absolute percentage error in within-sample backcasts:
+  Last year:   2.83      Last-1 year:   1.50     Last-2 year:   0.68
+  Last three years:    1.67
+
+
+
+               The model chosen is (0, 1, 1)(0, 1, 1)
+
+
+ Average absolute percentage error in within-sample forecasts:
+  Last year:   1.07      Last-1 year:   0.69     Last-2 year:   0.63
+  Last three years:    0.80
+
+ Estimation converged in   33 ARMA iterations,  178 function evaluations.
+
+ Regression Model
+ ------------------------------------------------------------------------------
+                             Parameter        Standard
+ Variable                     Estimate           Error      t-value
+ ------------------------------------------------------------------------------
+ LS2015.1                      -0.0203         0.00684        -2.97
+ LS2020.2                      -0.0956         0.01080        -8.85
+ LS2020.3                       0.0446         0.01040         4.29
+
+ User-defined
+   somevariable1               -0.0003         0.00042        -0.81
+   somevariable2               -0.0019         0.00351        -0.55
+ ------------------------------------------------------------------------------
+
+
+ ARIMA Model:  (0, 1, 1)(0, 1, 1)
+   Nonseasonal differences: 1
+   Seasonal differences:    1
+                                              Standard
+ Parameter                    Estimate          Errors
+ -----------------------------------------------------
+ Nonseasonal MA                                    
+   Lag  1                       0.1389         0.16547
+
+ Seasonal MA                                       
+   Lag  4                      -0.1653         0.16265
+
+ Variance                       0.10372E-03
+ SE of Var                      0.24447E-04
+ -----------------------------------------------------
+
+ Likelihood Statistics
+ ------------------------------------------------------------------
+ Number of observations (nobs)                                   41
+ Effective number of observations (nefobs)                       36
+ Number of parameters estimated (np)                              8
+ Log likelihood                                            113.9822
+ Transformation Adjustment                                -359.6598
+ Adjusted Log likelihood (L)                              -245.6777
+ AIC                                                       507.3554 
+ AICC (F-corrected-AIC)                                    512.6887 
+ Hannan Quinn                                              511.7769 
+ BIC                                                       520.0235 
+ ------------------------------------------------------------------
+
+
+ FORECASTING
+  Origin    2021.1
+  Number         6
+
+  Forecasts and Standard Errors of the Transformed Data
+   ----------------------------
+                       Standard
+     Date   Forecast      Error
+   ----------------------------
+   2021.2      10.00      0.016
+   2021.3      10.08      0.021
+   2021.4      10.17      0.022
+   2022.1       9.97      0.024
+   2022.2      10.04      0.038
+   2022.3      10.13      0.046
+   ----------------------------
+
+  Confidence intervals with coverage probability (0.95000)
+  On the Original Scale
+   -------------------------------------
+     Date      Lower  Forecast     Upper
+   -------------------------------------
+   2021.2   21235.07  21927.18  22641.84
+   2021.3   22944.73  23888.31  24870.70
+   2021.4   24989.72  26108.77  27277.93
+   2022.1   20454.41  21443.05  22479.47
+   2022.2   21315.65  22943.39  24695.42
+   2022.3   22846.33  24987.71  27329.80
+   -------------------------------------
+        Title            PAGE   3, SERIES mmax13
+
+ A 6  RegARIMA trading day component
+  From      2011.1 to 2021.1
+  Observations         41
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th            AVGE  
+ ------------------------------------------------------------------------------
+  2011           100.1         99.9        100.0        100.1            100.0
+ 
+  2012           100.1         99.9        100.1         99.9            100.0
+ 
+  2013           100.0        100.2        100.0         99.9            100.0
+ 
+  2014           100.0        100.1        100.0         99.9            100.0
+ 
+  2015           100.2        100.0        100.0         99.9            100.0
+ 
+  2016           100.1        100.0        100.0        100.1            100.0
+ 
+  2017           100.0        100.1        100.1        100.1            100.1
+ 
+  2018           100.1        100.0        100.1         99.9            100.0
+ 
+  2019           100.0        100.2        100.0         99.9            100.0
+ 
+  2020           100.1        100.1        100.0         99.9            100.0
+ 
+  2021           100.1                                                   100.1
+ 
+  AVGE           100.1        100.1        100.0        100.0
+
+  Table Total-          4101.14   Mean-         100.03   Std. Dev.-           0.08
+                                  Min -          99.93        Max -         100.21
+
+ A 6.A  RegARIMA trading day component forecasts
+  From      2021.2 to 2022.3
+  Observations          6
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th            AVGE  
+ ------------------------------------------------------------------------------
+  2021                         99.9        100.0         99.9             99.9
+ 
+  2022           100.0         99.9        100.0                         100.0
+ 
+        Title            PAGE   4, SERIES mmax13
+  
+ A 8  RegARIMA combined outlier component
+      (LS outliers included)
+  From      2011.1 to 2021.1
+  Observations         41
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th            AVGE  
+ ------------------------------------------------------------------------------
+  2011           107.4        107.4        107.4        107.4            107.4
+ 
+  2012           107.4        107.4        107.4        107.4            107.4
+ 
+  2013           107.4        107.4        107.4        107.4            107.4
+ 
+  2014           107.4        107.4        107.4        107.4            107.4
+ 
+  2015           105.2        105.2        105.2        105.2            105.2
+ 
+  2016           105.2        105.2        105.2        105.2            105.2
+ 
+  2017           105.2        105.2        105.2        105.2            105.2
+ 
+  2018           105.2        105.2        105.2        105.2            105.2
+ 
+  2019           105.2        105.2        105.2        105.2            105.2
+ 
+  2020           105.2         95.6        100.0        100.0            100.2
+ 
+  2021           100.0                                                   100.0
+ 
+  AVGE           105.5        105.1        105.6        105.6
+
+  Table Total-          4323.59   Mean-         105.45   Std. Dev.-           5.98
+                                  Min -          95.63        Max -         107.39
+
+ A 8.A  RegARIMA outlier component
+  From      2021.2 to 2022.3
+  Observations          6
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th            AVGE  
+ ------------------------------------------------------------------------------
+  2021                        100.0        100.0        100.0            100.0
+ 
+  2022           100.0        100.0        100.0                         100.0
+ 
+        Title            PAGE   5, SERIES mmax13
+
+ A 9  RegARIMA user-defined regression component
+  From      2011.1 to 2021.1
+  Observations         41
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th            AVGE  
+ ------------------------------------------------------------------------------
+  2011           100.0        100.0        100.0        100.0            100.0
+ 
+  2012            99.8        100.0        100.0        100.0            100.0
+ 
+  2013           100.0        100.0        100.0        100.0            100.0
+ 
+  2014           100.0        100.0        100.0        100.0            100.0
+ 
+  2015           100.0        100.0        100.0        100.0            100.0
+ 
+  2016            99.8        100.0        100.0        100.0            100.0
+ 
+  2017           100.0        100.0        100.0        100.0            100.0
+ 
+  2018           100.0        100.0        100.0        100.0            100.0
+ 
+  2019           100.0        100.0        100.0        100.0            100.0
+ 
+  2020            99.8        100.0        100.0        100.0            100.0
+ 
+  2021           100.0                                                   100.0
+ 
+  AVGE            99.9        100.0        100.0        100.0
+
+  Table Total-          4099.43   Mean-          99.99   Std. Dev.-           0.05
+                                  Min -          99.81        Max -         100.00
+
+ A 9.A  RegARIMA user-defined regression component forecasts
+  From      2021.2 to 2022.3
+  Observations          6
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th            AVGE  
+ ------------------------------------------------------------------------------
+  2021                        100.0        100.0        100.0            100.0
+ 
+  2022           100.0        100.0        100.0                         100.0
+ 
+        Title            PAGE   6, SERIES mmax13
+  
+ B 1  Original series (prior adjusted)
+      (adjusted for regARIMA factors)
+  From      2008.1 to 2021.1
+  Observations         53
+  Includes 12 backcasts.
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th           TOTAL  
+ ------------------------------------------------------------------------------
+  2008          14205.       15234.       16242.       17523.           63204.
+ 
+  2009          15128.       16223.       17297.       18661.           67308.
+ 
+  2010          16110.       17277.       18420.       19873.           71680.
+ 
+  2011          17161.       18372.       19542.       21049.           76123.
+ 
+  2012          18176.       19261.       20200.       21584.           79221.
+ 
+  2013          18353.       19541.       20529.       22135.           80558.
+ 
+  2014          18345.       19667.       20817.       22340.           81169.
+ 
+  2015          18407.       19474.       20882.       22433.           81197.
+ 
+  2016          18411.       19531.       20896.       22525.           81363.
+ 
+  2017          18638.       19983.       21421.       22760.           82803.
+ 
+  2018          19095.       20531.       21985.       23526.           85138.
+ 
+  2019          19356.       20741.       22586.       24198.           86883.
+ 
+  2020          19645.       21066.       22945.       25012.           88669.
+ 
+  2021          20502.                                                  20502.
+ 
+  AVGE          17967.       18992.       20290.       21817.
+
+  Table Total-       1045817.25   Mean-       19732.40   Std. Dev.-        2335.65
+                                  Min -       17161.36        Max -       25012.18
+
+ B 1.A  Forecasts of (prior adjusted) original series
+  From      2021.2 to 2022.3
+  Observations          6
+ ------------------------------------------------------------------------------
+                  1st          2nd          3rd          4th           TOTAL  
+ ------------------------------------------------------------------------------
+  2021                       21949.       23895.       26123.           71968.
+ 
+  2022          21453.       22959.       24996.                        69408.
+ 
